@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "name": "TRADEOFF provisional mission dataset",
+    "version": "0.3.0",
+    "status": "provisional",
+    "lastReviewed": "2026-11-13",
+    "targetDirectory": "src/data/",
+    "uiStatusModule": "src/data/dataset.ts"
+  },
+  "integration": {
+    "state": "awaiting-official-pack",
+    "requiredForRelease": true,
+    "dropZone": "resources/incoming/",
+    "instructions": "Place official NASA files in resources/incoming/, add them to this manifest, then follow docs/RESOURCE-INTEGRATION.md.",
+    "validationCommand": "npm run data:check",
+    "strictValidationCommand": "npm run data:check -- --strict"
+  },
+  "sources": [
+    {
+      "id": "nasa-spaceapps-2026-pack",
+      "name": "NASA Space Apps Challenge 2026 official challenge resource pack",
+      "publisher": "NASA Space Apps Challenge",
+      "kind": "official-dataset",
+      "status": "pending",
+      "required": true,
+      "url": "https://www.spaceappschallenge.org/",
+      "files": [],
+      "feeds": [
+        "src/data/components.ts",
+        "src/data/objectives.ts",
+        "src/data/orbits.ts",
+        "src/data/launchVehicles.ts",
+        "src/data/bodies.ts",
+        "src/data/measurements.ts"
+      ],
+      "notes": "The official pack has not been supplied in this workspace. Current values are gameplay-balanced provisional estimates. Drop official files into resources/incoming/ and map their fields before claiming official data status."
+    },
+    {
+      "id": "jpl-cml-paper",
+      "name": "Space Mission Concept Development Using Concept Maturity Levels",
+      "publisher": "JPL / IEEE Aerospace Conference",
+      "kind": "methodology-reference",
+      "status": "integrated-reference",
+      "required": false,
+      "citation": "Wessen, R. R., Borden, C., Ziemer, J., & Kwok, J. (2013). Space Mission Concept Development Using Concept Maturity Levels. IEEE Aerospace Conference.",
+      "providedFile": "/home/dr3/Music/13-3547_A1b.pdf",
+      "feeds": ["src/engine/maturity.ts", "src/components/screens/ReportScreen.tsx"],
+      "notes": "CML 1-4 definitions were adapted into a game badge. The app labels this as a game adaptation, not an official NASA assessment."
+    },
+    {
+      "id": "nasa-design-develop-science-mission",
+      "name": "Design and Develop Science Missions",
+      "publisher": "NASA",
+      "kind": "methodology-reference",
+      "status": "integrated-reference",
+      "required": false,
+      "providedFile": "/home/dr3/Music/250323-design-and-develop-science-mission.pdf",
+      "url": "https://www.nasa.gov/smallsat-institute/access-to-space-for-all/",
+      "feeds": [
+        "src/components/screens/ReviewScreen.tsx",
+        "src/engine/compatibility.ts",
+        "src/engine/report.ts"
+      ],
+      "notes": "Used for the mission-segment discipline spine (science, spacecraft, launch, ground, operations) and review/closure framing. It is not a source of numerical component data."
+    },
+    {
+      "id": "nasa-cubesat-101",
+      "name": "CubeSat 101: Basic Concepts and Processes for First-Time CubeSat Developers",
+      "publisher": "NASA CubeSat Launch Initiative",
+      "kind": "methodology-reference",
+      "status": "integrated-reference",
+      "required": false,
+      "providedFile": "/home/dr3/Pictures/nasa_csli_cubesat_101_508.pdf",
+      "url": "https://www.nasa.gov/directorates/stmd/space-tech-mission-directorate/cubesat-launch-initiative/",
+      "feeds": ["docs/RESOURCE-INTEGRATION.md"],
+      "notes": "Used as supporting guidance for small-spacecraft process, reviews, integration and test, and risk language. Numerical values are not taken directly from this guide."
+    },
+    {
+      "id": "nasa-gsfc-mdl",
+      "name": "NASA Goddard Mission Design Lab discipline set",
+      "publisher": "NASA Goddard Space Flight Center",
+      "kind": "methodology-reference",
+      "status": "integrated-reference",
+      "required": false,
+      "url": "https://etd.gsfc.nasa.gov/capabilities/integrated-design-center/mission-design-lab/",
+      "feeds": [
+        "src/data/components.ts",
+        "src/engine/design.ts",
+        "src/engine/compatibility.ts",
+        "src/components/screens/ReviewScreen.tsx"
+      ],
+      "notes": "Inspired the mass equipment list, power/data budgets, orbit analysis, launch accommodations, risk and cost review structure. The game is an independent prototype, not an official MDL product."
+    },
+    {
+      "id": "nasa-mission-viz",
+      "name": "NASA mission-viz",
+      "publisher": "NASA",
+      "kind": "visualization-reference",
+      "status": "deferred-adapter",
+      "required": false,
+      "url": "https://github.com/nasa/mission-viz",
+      "license": "See upstream repository",
+      "feeds": ["docs/RESOURCE-INTEGRATION.md"],
+      "notes": "Evaluated for a Three.js mission visualization. The current single-player build uses a dependency-light SVG orrery and flight track; a mission-viz adapter would be a post-v1 enhancement and must preserve the zero-backend constraint or run as a static asset."
+    },
+    {
+      "id": "webb-build-it-yourself",
+      "name": "James Webb Space Telescope: Build It Yourself",
+      "publisher": "NASA Science",
+      "kind": "outreach-reference",
+      "status": "integrated-inspiration",
+      "required": false,
+      "url": "https://science.nasa.gov/mission/webb/game-build-it-yourself/",
+      "feeds": ["src/data/objectives.ts", "src/components/screens/ReportScreen.tsx"],
+      "notes": "Used for architecture trade-off framing and real-mission analogue references. No assets, code, or text were copied from the Webb game."
+    },
+    {
+      "id": "nasa-gmat",
+      "name": "General Mission Analysis Tool (GMAT)",
+      "publisher": "NASA / SourceForge",
+      "kind": "analysis-tool",
+      "status": "integrated-handoff",
+      "required": false,
+      "url": "https://sourceforge.net/projects/gmat/",
+      "license": "Apache License 2.0",
+      "feeds": ["src/engine/gmat.ts", "src/components/screens/OrbitScreen.tsx"],
+      "notes": "GMAT is not embedded. The app downloads a starting .script for Earth, Moon, Mars and Venus, or a JSON orbit-element set where GMAT lacks a stock central body. Force model and frame must be re-validated in GMAT."
+    }
+  ],
+  "fieldMappings": [
+    {
+      "id": "components",
+      "target": "src/data/components.ts",
+      "fields": [
+        "massKg",
+        "costMusd",
+        "volumeM3",
+        "powerW",
+        "generationW",
+        "capacityWh",
+        "downlinkMbps",
+        "sciencePerDay",
+        "dataGbPerDay",
+        "lifetimeMonths",
+        "radToleranceKrad"
+      ],
+      "sourceIds": ["nasa-spaceapps-2026-pack", "nasa-gsfc-mdl"],
+      "fallback": "Provisional gameplay-balanced values; see dataset status in the app."
+    },
+    {
+      "id": "objectives",
+      "target": "src/data/objectives.ts",
+      "fields": [
+        "measurementsRequired",
+        "minScience",
+        "minCoveragePct",
+        "requiredLifetimeMonths",
+        "pointingRequirementArcsec",
+        "baseBudgetMusd",
+        "allowedOrbits"
+      ],
+      "sourceIds": ["nasa-spaceapps-2026-pack", "nasa-gsfc-mdl"],
+      "fallback": "Provisional science targets and budgets."
+    },
+    {
+      "id": "orbits",
+      "target": "src/data/orbits.ts",
+      "fields": [
+        "altitudeLabel",
+        "inclinationDeg",
+        "periodHours",
+        "eclipseHours",
+        "coveragePct",
+        "revisitHours",
+        "commsWindowsPerDay",
+        "commsWindowHours",
+        "radiationKradPerYear",
+        "stationKeepingMpsPerYear"
+      ],
+      "sourceIds": ["nasa-spaceapps-2026-pack", "nasa-gsfc-mdl"],
+      "fallback": "Provisional orbit geometry and environment values."
+    },
+    {
+      "id": "launch-vehicles",
+      "target": "src/data/launchVehicles.ts",
+      "fields": [
+        "costMusd",
+        "fairingDiameterM",
+        "fairingHeightM",
+        "reliabilityPct",
+        "payloadKg"
+      ],
+      "sourceIds": ["nasa-spaceapps-2026-pack"],
+      "fallback": "Provisional public-source launch performance values."
+    },
+    {
+      "id": "maturity",
+      "target": "src/engine/maturity.ts",
+      "fields": ["levelDefinitions", "evidenceRules"],
+      "sourceIds": ["jpl-cml-paper"],
+      "fallback": "Game adaptation of CML 1-4; not an official assessment."
+    }
+  ],
+  "releaseChecklist": [
+    "Official NASA Space Apps resource pack supplied with usage terms recorded.",
+    "Every official file listed in sources[].files and copied into resources/incoming/.",
+    "Field mappings reviewed; sourceIds point at recorded sources.",
+    "Provisional values replaced or explicitly marked mixed/official in src/data/dataset.ts.",
+    "DataStatusModal and README updated to match the new status.",
+    "npm run data:check -- --strict passes.",
+    "npm test and npm run build pass."
+  ]
+}
