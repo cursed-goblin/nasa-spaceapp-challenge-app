@@ -44,10 +44,17 @@
       color: #ff00ff;
       margin-bottom: 1rem;
     }
-    .slide p {
+    .slide p, .slide li {
       font-size: 1.1rem;
       line-height: 1.6;
-      max-width: 800px;
+      max-width: 900px;
+    }
+    .slide ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .slide li {
+      margin-bottom: 0.5rem;
     }
     .slide .visual {
       margin-top: 2rem;
@@ -94,35 +101,62 @@
       <h1>TRADEOFF</h1>
       <h2>Space Mission Design Lab</h2>
       <p>NASA Space Apps Challenge 2026 · Team [Your Team Name]</p>
-      <div class="visual">
-        <p><strong>“There is no perfect spacecraft. Only trade‑offs.”</strong></p>
-        <p>Mission patch + screenshot of the builder</p>
-      </div>
+      <ul>
+        <li><strong>“There is no perfect spacecraft. Only trade‑offs.”</strong></li>
+        <li>Mission patch + screenshot of the builder</li>
+        <li>7 subsystems · 25 components · 15 orbits · 6 launch vehicles · 6 target bodies</li>
+      </ul>
     </div>
     <div class="slide" id="slide-2">
       <h1>The Problem</h1>
       <p>Space missions must satisfy science, engineering, budget, and risk constraints simultaneously. Every choice opens one door and closes another.</p>
+      <ul>
+        <li>Science objectives vary by target body (Earth, Moon, Mars, Venus, Europa, asteroid).</li>
+        <li>Each mission demands a different measurement suite, coverage, lifetime, and budget.</li>
+        <li>Engineers must balance mass, power, data, pointing, lifetime, and cost.</li>
+      </ul>
       <div class="visual">
         <p>Split screen: Earth vs. Europa mission needs</p>
       </div>
     </div>
     <div class="slide" id="slide-3">
       <h1>What We Built</h1>
-      <p>7 subsystems · 25 components · 15 orbits · 6 launch vehicles · 6 target bodies</p>
-      <div class="visual">
-        <p>Animated schematic of the spacecraft</p>
-      </div>
+      <p>A browser‑based mission design game with a full design loop:</p>
+      <ul>
+        <li><strong>Briefing:</strong> choose mission objective and difficulty.</li>
+        <li><strong>Spacecraft:</strong> select components across 7 subsystems; live mass/power/data/cost updates.</li>
+        <li><strong>Orbit:</strong> compare 15 orbits for coverage, eclipse, radiation, comms.</li>
+        <li><strong>Launch:</strong> test mass, fairing envelope, and programme cost across 6 vehicles.</li>
+        <li><strong>Review:</strong> NASA‑MDL‑style compatibility check with JPL‑CML maturity badge.</li>
+        <li><strong>Flight:</strong> deterministic 1800‑day simulation with live telemetry.</li>
+        <li><strong>Report:</strong> score audit, science closure, findings, next design move.</li>
+        <li><strong>Hangar:</strong> save runs, leaderboard, compare up to three runs side‑by‑side.</li>
+      </ul>
     </div>
     <div class="slide" id="slide-4">
       <h1>How It Works</h1>
       <p>Deterministic 1800‑day simulation with real‑time battery, data, power, and science telemetry.</p>
+      <ul>
+        <li><strong>Eclipse:</strong> power generation drops to zero during orbit eclipse.</li>
+        <li><strong>Battery:</strong> state of charge tracked minute‑by‑minute.</li>
+        <li><strong>Buffer overflow:</strong> data loss if storage exceeds capacity.</li>
+        <li><strong>Downlink:</strong> data downlinked only during comms windows.</li>
+        <li><strong>Degradation:</strong> hardware ages over mission lifetime.</li>
+        <li><strong>Science return:</strong> measurements taken based on coverage and pointing.</li>
+      </ul>
       <div class="visual">
         <p>Flight‑track replay GIF</p>
       </div>
     </div>
     <div class="slide" id="slide-5">
       <h1>NASA Data Used</h1>
-      <p>JPL CML maturity badge · mission‑viz reference · GMAT handoff · CubeSat 101</p>
+      <p>TRADEOFF is built on open NASA resources:</p>
+      <ul>
+        <li><strong>CSLI CubeSat 101:</strong> mission‑design framing and launch‑vehicle sizing.</li>
+        <li><strong>JPL CML framework:</strong> game‑adapted maturity badge (not an official assessment).</li>
+        <li><strong>NASA mission‑viz:</strong> open‑source 3D orbit reference (deferred to SVG orrery).</li>
+        <li><strong>GMAT:</strong> downloadable trajectory handoff scripts (structurally generated).</li>
+      </ul>
       <div class="visual">
         <p>Logos of NASA resources (public domain)</p>
       </div>
@@ -130,6 +164,13 @@
     <div class="slide" id="slide-6">
       <h1>Impact & Reuse</h1>
       <p>Educators, students, and mission‑design teams can iterate designs instantly.</p>
+      <ul>
+        <li><strong>Zero backend:</strong> runs entirely in the browser, no account needed.</li>
+        <li><strong>Shareable:</strong> URL‑encoded designs can be shared with a link.</li>
+        <li><strong>Local hangar:</strong> save runs, compare up to three designs side‑by‑side.</li>
+        <li><strong>Responsive:</strong> works on desktop, tablet, and mobile.</li>
+        <li><strong>Open source:</strong> React 19, Vite 8, TypeScript, all MIT/Apache‑2.0 licensed.</li>
+      </ul>
       <div class="visual">
         <p>Screenshot of the hangar compare table</p>
       </div>
@@ -137,6 +178,12 @@
     <div class="slide" id="slide-7">
       <h1>Look Into the Future</h1>
       <p>“Every mission is a trade‑off. TRADEOFF makes them visible.”</p>
+      <ul>
+        <li><strong>Official NASA dataset pack:</strong> drop‑in integration ready (provisional → official).</li>
+        <li><strong>GMAT validation:</strong> scripts can be run in a real GMAT install.</li>
+        <li><strong>3D visualization:</strong> integrate NASA mission‑viz for full 3D orbits.</li>
+        <li><strong>Multiplayer:</strong> backend + global leaderboard (deferred).</li>
+      </ul>
       <div class="visual">
         <p>Call‑to‑action: QR code / URL</p>
       </div>
