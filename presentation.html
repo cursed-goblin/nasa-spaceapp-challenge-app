@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TRADEOFF – NASA Space Apps Challenge 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: #0a0a1a;
+      color: #e0e0ff;
+      overflow: hidden;
+    }
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem;
+      background: linear-gradient(135deg, #0a0a1a, #12122a);
+    }
+    .slide.active {
+      display: flex;
+    }
+    .slide h1 {
+      font-family: "Press Start 2P", monospace;
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      color: #00ffff;
+      text-shadow: 0 0 20px #00ffff;
+      margin-bottom: 1rem;
+    }
+    .slide h2 {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: #ff00ff;
+      margin-bottom: 1rem;
+    }
+    .slide p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+    .slide .visual {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 2px solid #00ffff;
+      background: rgba(0, 255, 255, 0.05);
+      max-width: 900px;
+    }
+    .nav {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      z-index: 10;
+    }
+    .nav button {
+      padding: 0.5rem 1rem;
+      background: #00ffff;
+      color: #0a0a1a;
+      border: none;
+      font-family: "Press Start 2P", monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .nav button:hover {
+      background: #ff00ff;
+      color: #0a0a1a;
+    }
+    .slide-number {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: #8080cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="slide active" id="slide-1">
+      <h1>TRADEOFF</h1>
+      <h2>Space Mission Design Lab</h2>
+      <p>NASA Space Apps Challenge 2026 · Team [Your Team Name]</p>
+      <div class="visual">
+        <p><strong>“There is no perfect spacecraft. Only trade‑offs.”</strong></p>
+        <p>Mission patch + screenshot of the builder</p>
+      </div>
+    </div>
+    <div class="slide" id="slide-2">
+      <h1>The Problem</h1>
+      <p>Space missions must satisfy science, engineering, budget, and risk constraints simultaneously. Every choice opens one door and closes another.</p>
+      <div class="visual">
+        <p>Split screen: Earth vs. Europa mission needs</p>
+      </div>
+    </div>
+    <div class="slide" id="slide-3">
+      <h1>What We Built</h1>
+      <p>7 subsystems · 25 components · 15 orbits · 6 launch vehicles · 6 target bodies</p>
+      <div class="visual">
+        <p>Animated schematic of the spacecraft</p>
+      </div>
+    </div>
+    <div class="slide" id="slide-4">
+      <h1>How It Works</h1>
+      <p>Deterministic 1800‑day simulation with real‑time battery, data, power, and science telemetry.</p>
+      <div class="visual">
+        <p>Flight‑track replay GIF</p>
+      </div>
+    </div>
+    <div class="slide" id="slide-5">
+      <h1>NASA Data Used</h1>
+      <p>JPL CML maturity badge · mission‑viz reference · GMAT handoff · CubeSat 101</p>
+      <div class="visual">
+        <p>Logos of NASA resources (public domain)</p>
+      </div>
+    </div>
+    <div class="slide" id="slide-6">
+      <h1>Impact & Reuse</h1>
+      <p>Educators, students, and mission‑design teams can iterate designs instantly.</p>
+      <div class="visual">
+        <p>Screenshot of the hangar compare table</p>
+      </div>
+    </div>
+    <div class="slide" id="slide-7">
+      <h1>Look Into the Future</h1>
+      <p>“Every mission is a trade‑off. TRADEOFF makes them visible.”</p>
+      <div class="visual">
+        <p>Call‑to‑action: QR code / URL</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number" id="slide-number">Slide 1 / 7</div>
+  <div class="nav">
+    <button onclick="prevSlide()">Prev</button>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const number = document.getElementById('slide-number');
+    function showSlide(n) {
+      slides[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      number.textContent = `Slide ${current + 1} / ${slides.length}`;
+    }
+    function nextSlide() { showSlide(current + 1); }
+    function prevSlide() { showSlide(current - 1); }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+</body>
+</html>
